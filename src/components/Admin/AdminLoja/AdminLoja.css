@@ -1,0 +1,98 @@
+/* Estilos gerais */
+.admin-loja-dashboard {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.admin-loja-dashboard h2 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Botões */
+.admin-loja-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.admin-loja-actions button,
+.logout-section button {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.admin-loja-actions button:hover,
+.logout-section button:hover {
+  background: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Logout */
+.logout-section {
+  margin-top: 20px;
+}
+
+/* Estilos para lista de produtos */
+.produtos-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.produto-item {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: 0.3s ease-in-out;
+}
+
+.produto-item:hover {
+  transform: translateY(-5px);
+}
+
+.produto-imagem {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.produto-info {
+  margin-top: 10px;
+}
+
+.produto-actions {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.produto-actions button {
+  background: #28a745;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.produto-actions button:hover {
+  background: #218838;
+}

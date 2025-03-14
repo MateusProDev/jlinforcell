@@ -1,0 +1,90 @@
+/* Reset básico para evitar interferências */
+* {
+    box-sizing: border-box;
+}
+
+.rotativo-container {
+    width: 100%;
+    height: 350px; /* Altura fixa */
+    margin: 90px 0 20px 0;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.rotativo-swiper {
+    width: 100% !important; /* Sobrescreve qualquer estilo inline */
+    height: 100% !important; /* Usa a altura do container pai */
+}
+
+.rotativo-image {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover; /* Preenche o espaço */
+}
+
+/* Placeholder */
+.rotativo-placeholder {
+    text-align: center;
+    font-size: 18px;
+    color: #555;
+}
+
+/* Media Query para telas maiores (acima de 768px) */
+@media (min-width: 768px) {
+    .rotativo-container {
+        width: 90%; /* Ocupa 90% da largura */
+        max-width: 1200px; /* Limite máximo */
+        margin: 90px auto 20px auto; /* Centraliza */
+        height: 350px; /* Altura fixa */
+    }
+
+    .swiper {
+        width: 100% !important; /* Sobrescreve estilos padrão do Swiper */
+        height: 100% !important;
+        margin-left: 0 !important; /* Remove margens automáticas */
+        margin-right: 0 !important;
+    }
+
+    .rotativo-swiper {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    .swiper-slide {
+        width: 100% !important; /* Garante que cada slide ocupe o espaço total */
+        height: 100% !important;
+    }
+
+    .rotativo-image {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover;
+    }
+}
+
+/* Media Query para telas menores (mobile) */
+@media (max-width: 767px) {
+    .rotativo-container {
+        width: 100%;
+        max-width: 100vw;
+        margin: 90px 0 20px 0;
+        height: 350px;
+    }
+
+    .swiper {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    .rotativo-swiper {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    .rotativo-image {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover;
+    }
+}
