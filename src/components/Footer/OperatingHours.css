@@ -8,7 +8,7 @@
   .operating-hours h3 {
     margin-bottom: 10px;
     font-size: 1.2rem;
-    color: #171717;
+    color: #fff;
   }
   
   .operating-hours ul {
@@ -22,6 +22,6 @@
     max-width: 250px;
     margin: 0 auto;
     font-size: 0.9rem;
-    color: #000;
+    color: #fff;
   }
   

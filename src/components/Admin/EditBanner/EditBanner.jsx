@@ -3,6 +3,7 @@ import { db } from "../../../firebase/firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import uploadimg from "../../../assets/uploadimg.png";  // Importando a imagem
 import "./EditBanner.css";
 
 const EditBanner = () => {
@@ -78,10 +79,10 @@ const EditBanner = () => {
     <div className="edit-banner-panel">
       <h2>Editar Banner</h2>
 
-      {error && <p className="error">{error}</p>}
-      {success && <p className="success">{success}</p>}
+      {error && <p className="edit-banner-error">{error}</p>}
+      {success && <p className="edit-banner-success">{success}</p>}
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="edit-banner-form">
         <label>Texto do Banner</label>
         <input
           type="text"
@@ -98,22 +99,38 @@ const EditBanner = () => {
         />
 
         <label>Imagem Principal</label>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => handleImageUpload(e.target.files[0], "imageUrl")}
-          disabled={loading}
-        />
-        {bannerData.imageUrl && <img src={bannerData.imageUrl} alt="Prévia" className="banner-preview" />}
+        <div className="image-upload-container" onClick={() => document.getElementById("imageUpload").click()}>
+          <input
+            type="file"
+            id="imageUpload"
+            accept="image/*"
+            style={{ display: "none" }}
+            onChange={(e) => handleImageUpload(e.target.files[0], "imageUrl")}
+            disabled={loading}
+          />
+          <img 
+            src={bannerData.imageUrl || uploadimg}  
+            alt="Imagem de Upload" 
+            className="image-placeholder" 
+          />
+        </div>
 
         <label>Imagem de Fundo</label>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => handleImageUpload(e.target.files[0], "bgUrl")}
-          disabled={loading}
-        />
-        {bannerData.bgUrl && <img src={bannerData.bgUrl} alt="Prévia" className="banner-preview" />}
+        <div className="image-upload-container" onClick={() => document.getElementById("bgUpload").click()}>
+          <input
+            type="file"
+            id="bgUpload"
+            accept="image/*"
+            style={{ display: "none" }}
+            onChange={(e) => handleImageUpload(e.target.files[0], "bgUrl")}
+            disabled={loading}
+          />
+          <img 
+            src={bannerData.bgUrl || uploadimg}
+            alt="Imagem de Fundo" 
+            className="image-placeholder" 
+          />
+        </div>
 
         <button type="submit" disabled={loading}>
           {loading ? "Salvando..." : "Salvar Banner"}
