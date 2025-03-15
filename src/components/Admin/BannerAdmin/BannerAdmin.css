@@ -9,8 +9,14 @@
 
 .banner-admin h2 {
     color: #333;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     font-size: 22px;
+}
+
+.banner-admin .instructions {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 15px;
 }
 
 .banner-admin input {
@@ -35,6 +41,12 @@
 
 .banner-admin button:hover {
     background: #0056b3;
+}
+
+.banner-admin .error {
+    color: #ff0000;
+    font-size: 14px;
+    margin-top: 10px;
 }
 
 .banner-admin ul {

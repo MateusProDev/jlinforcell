@@ -18,7 +18,7 @@ const BannerAdmin = () => {
     try {
       const bannersCollection = collection(db, "bannersLojinha");
       const snapshot = await getDocs(bannersCollection);
-      const bannersData = snapshot.docs.map(doc => ({
+      const bannersData = snapshot.docs.map((doc) => ({
         id: doc.id,
         imageUrl: doc.data().imageUrl,
       }));
@@ -26,6 +26,35 @@ const BannerAdmin = () => {
     } catch (error) {
       console.error("Erro ao carregar banners:", error);
     }
+  };
+
+  const validateImage = (file) => {
+    return new Promise((resolve, reject) => {
+      // Verifica o tamanho do arquivo (máximo 300 KB = 300 * 1024 bytes)
+      if (file.size > 300 * 1024) {
+        reject("A imagem deve ter no máximo 300 KB.");
+        return;
+      }
+
+      // Verifica o formato (apenas WebP ou JPG)
+      const validFormats = ["image/webp", "image/jpeg"];
+      if (!validFormats.includes(file.type)) {
+        reject("A imagem deve estar no formato WebP ou JPG.");
+        return;
+      }
+
+      // Verifica as dimensões (1920 x 1080)
+      const img = new Image();
+      img.onload = () => {
+        if (img.width !== 1920 || img.height !== 1080) {
+          reject("A imagem deve ter exatamente 1920 x 1080 pixels.");
+        } else {
+          resolve();
+        }
+      };
+      img.onerror = () => reject("Erro ao carregar a imagem para validação.");
+      img.src = URL.createObjectURL(file);
+    });
   };
 
   const handleUpload = async () => {
@@ -37,12 +66,15 @@ const BannerAdmin = () => {
     setLoading(true);
     setError("");
 
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", "qc7tkpck"); // Seu upload preset do Cloudinary
-    formData.append("cloud_name", "doeiv6m4h"); // Seu Cloud Name do Cloudinary
-
     try {
+      // Valida a imagem antes do upload
+      await validateImage(file);
+
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "qc7tkpck"); // Seu upload preset do Cloudinary
+      formData.append("cloud_name", "doeiv6m4h"); // Seu Cloud Name do Cloudinary
+
       const response = await axios.post(
         "https://api.cloudinary.com/v1_1/doeiv6m4h/image/upload",
         formData
@@ -55,7 +87,7 @@ const BannerAdmin = () => {
       setFile(null);
       fetchBanners(); // Atualiza a lista após upload
     } catch (error) {
-      setError("Erro ao enviar imagem.");
+      setError(error.message || "Erro ao enviar imagem.");
       console.error("Erro ao enviar imagem:", error);
     } finally {
       setLoading(false);
@@ -74,8 +106,16 @@ const BannerAdmin = () => {
   return (
     <div className="banner-admin">
       <h2>Gerenciar Banners</h2>
+      <p className="instructions">
+        Especificações da resolução dos Banners: <br />
+         1920 x 1080 pixels (16:9), formato .JPG ou .WebP.
+      </p>
 
-      <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+      <input
+        type="file"
+        accept="image/webp,image/jpeg" // Restringe a seleção a WebP e JPG
+        onChange={(e) => setFile(e.target.files[0])}
+      />
       <button onClick={handleUpload} disabled={loading}>
         {loading ? "Enviando..." : "Adicionar Banner"}
       </button>

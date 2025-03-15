@@ -9,6 +9,7 @@ import "./BannerRotativo.css";
 
 const BannerRotativo = () => {
   const [banners, setBanners] = useState([]);
+  const [loading, setLoading] = useState(true); // Adiciona estado de carregamento
 
   useEffect(() => {
     const fetchBanners = async () => {
@@ -22,6 +23,8 @@ const BannerRotativo = () => {
         setBanners(bannersData);
       } catch (error) {
         console.error("Erro ao buscar banners:", error);
+      } finally {
+        setLoading(false); // Finaliza o carregamento
       }
     };
 
@@ -30,7 +33,9 @@ const BannerRotativo = () => {
 
   return (
     <div className="rotativo-container">
-      {banners.length > 0 ? (
+      {loading ? (
+        <p className="rotativo-placeholder">Carregando banners...</p>
+      ) : banners.length > 0 ? (
         <Swiper
           modules={[Autoplay, Pagination]}
           autoplay={{ delay: 3000, disableOnInteraction: false }}
@@ -40,12 +45,17 @@ const BannerRotativo = () => {
         >
           {banners.map((banner) => (
             <SwiperSlide key={banner.id}>
-              <img src={banner.imageUrl} alt="Banner" className="rotativo-image" />
+              <img
+                src={banner.imageUrl}
+                alt="Banner"
+                className="rotativo-image"
+                onError={(e) => (e.target.src = "/placeholder-image.jpg")} // Imagem reserva em caso de erro
+              />
             </SwiperSlide>
           ))}
         </Swiper>
       ) : (
-        <p className="rotativo-placeholder">Carregando banners...</p>
+        <p className="rotativo-placeholder">Nenhum banner disponível</p>
       )}
     </div>
   );
