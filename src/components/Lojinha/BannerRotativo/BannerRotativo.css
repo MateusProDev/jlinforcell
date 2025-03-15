@@ -41,8 +41,8 @@
 /* Media Queries para ajustes finos */
 @media (max-width: 767px) {
     .rotativo-container {
-        height: 40vh; /* Altura menor para mobile */
-        margin: 60px auto 10px auto; /* Margens ajustadas para mobile */
+        height: 30vh; /* Altura menor para mobile */
+        margin: 80px auto 10px auto; /* Margens ajustadas para mobile */
     }
 }
 

@@ -61,6 +61,14 @@ const CategoryProducts = () => {
     setExpanded((prev) => !prev);
   };
 
+  // Função para calcular o preço original com base no desconto
+  const calculateOriginalPrice = (price, discountPercentage) => {
+    if (discountPercentage > 0) {
+      return (price / (1 - discountPercentage / 100)).toFixed(2);
+    }
+    return price.toFixed(2);
+  };
+
   if (loading) return <div>Carregando produtos...</div>;
   if (!category) return <div>Categoria '{categoryKey.replace(/-/g, " ")}' não encontrada.</div>;
 
@@ -84,13 +92,25 @@ const CategoryProducts = () => {
             {visibleProducts.map((product) => (
               <Link
                 key={product.name}
-                to={`/produto/${category.title.replace(/\s+/g, "-")}/${product.name.replace(/\s+/g, "-")}`} // Mantém hífens na URL
+                to={`/produto/${category.title.replace(/\s+/g, "-")}/${product.name.replace(/\s+/g, "-")}`}
                 className="product-item-link"
               >
                 <div className="product-item">
                   <img src={product.imageUrl} alt={product.name} className="product-image" />
-                  <p>{product.name} - R${product.price.toFixed(2)}</p>
-                  {product.description && <p>{product.description}</p>}
+                  {product.discountPercentage > 0 && (
+                    <span className="discount-tag">{product.discountPercentage}% OFF</span>
+                  )}
+                  <p>{product.name}</p>
+                  <div className="price-container">
+                    {product.discountPercentage > 0 && (
+                      <span className="original-price">
+                        R${calculateOriginalPrice(product.price || 0, product.discountPercentage)}
+                      </span>
+                    )}
+                    <span className="current-price">R${(product.price || 0).toFixed(2)}</span>
+                  </div>
+                  {product.description && <p className="product-description">{product.description}</p>}
+                  <button className="view-product-btn">Mais Detalhes</button>
                 </div>
               </Link>
             ))}

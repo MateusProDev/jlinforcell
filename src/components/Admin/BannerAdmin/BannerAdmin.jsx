@@ -30,12 +30,6 @@ const BannerAdmin = () => {
 
   const validateImage = (file) => {
     return new Promise((resolve, reject) => {
-      // Verifica o tamanho do arquivo (máximo 300 KB = 300 * 1024 bytes)
-      if (file.size > 300 * 1024) {
-        reject("A imagem deve ter no máximo 300 KB.");
-        return;
-      }
-
       // Verifica o formato (apenas WebP ou JPG)
       const validFormats = ["image/webp", "image/jpeg"];
       if (!validFormats.includes(file.type)) {
@@ -67,7 +61,7 @@ const BannerAdmin = () => {
     setError("");
 
     try {
-      // Valida a imagem antes do upload
+      // Valida a imagem antes do upload (sem limite de tamanho)
       await validateImage(file);
 
       const formData = new FormData();
@@ -107,8 +101,7 @@ const BannerAdmin = () => {
     <div className="banner-admin">
       <h2>Gerenciar Banners</h2>
       <p className="instructions">
-        Especificações da resolução dos Banners: <br />
-         1920 x 1080 pixels (16:9), formato .JPG ou .WebP.
+        Especificações: 1920 x 1080 pixels (16:9), formato WebP ou JPG.
       </p>
 
       <input
