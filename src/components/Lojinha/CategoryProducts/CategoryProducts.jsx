@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { db } from "../../../firebase/firebaseConfig";
 import { doc, onSnapshot } from "firebase/firestore";
+import { FiShare2 } from "react-icons/fi"; // Ícone de compartilhamento
 import "./CategoryProducts.css";
 
 const CategoryProducts = () => {
@@ -10,6 +11,7 @@ const CategoryProducts = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [expanded, setExpanded] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [copySuccess, setCopySuccess] = useState(""); // Estado para feedback de cópia
 
   useEffect(() => {
     const productsRef = doc(db, "lojinha", "produtos");
@@ -69,12 +71,30 @@ const CategoryProducts = () => {
     return price.toFixed(2);
   };
 
+  // Função para copiar o link da categoria
+  const shareCategoryLink = () => {
+    const categoryUrl = `${window.location.origin}/lojinha/produtos/${categoryKey}`;
+    navigator.clipboard.writeText(categoryUrl).then(() => {
+      setCopySuccess("Link copiado para a área de transferência!");
+      setTimeout(() => setCopySuccess(""), 2000); // Remove mensagem após 2 segundos
+    }).catch((err) => {
+      console.error("Erro ao copiar o link:", err);
+      setCopySuccess("Erro ao copiar o link.");
+    });
+  };
+
   if (loading) return <div>Carregando produtos...</div>;
   if (!category) return <div>Categoria '{categoryKey.replace(/-/g, " ")}' não encontrada.</div>;
 
   return (
     <div className="category-products-container">
-      <h1>{category.title}</h1>
+      <div className="category-header">
+        <h1>{category.title}</h1>
+        <button className="share-btn" onClick={shareCategoryLink} title="Compartilhar categoria">
+          <FiShare2 />
+        </button>
+      </div>
+      {copySuccess && <span className="copy-feedback">{copySuccess}</span>}
       <section className="search-bar">
         <input
           type="text"

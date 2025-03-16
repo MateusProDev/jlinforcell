@@ -42,7 +42,7 @@
 @media (max-width: 767px) {
     .rotativo-container {
         height: 30vh; /* Altura menor para mobile */
-        margin: 80px auto 10px auto; /* Margens ajustadas para mobile */
+        margin: 90px auto 10px auto; /* Margens ajustadas para mobile */
     }
 }
 
