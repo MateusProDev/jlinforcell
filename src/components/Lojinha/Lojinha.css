@@ -713,6 +713,11 @@
   .btnCar {
     font-size: 14px;
   }
+  .adminLink {
+    background-color: #007bff;
+    padding: 5px !important;
+    margin-left: 60px !important;
+  }
 }
 
 /* Efeitos de Profundidade e Clima */

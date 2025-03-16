@@ -30,23 +30,47 @@
 
 /* Estilo padrão dos botões */
 .admin-loja-actions button {
-  background: #007bff;
-  color: #fff;
   border: none;
   font-size: 16px;
   border-radius: 10px;
   cursor: pointer;
-  transition: transform 0.3s ease-in-out, background 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: #fff;
 }
 
 .admin-loja-actions button:hover {
-  background: #0056b3;
+  opacity: 0.9;
   transform: scale(1.05);
+}
+
+/* Cores específicas para cada botão */
+.admin-loja-actions button:nth-child(1) {
+  background: linear-gradient(135deg, #007bff, #0056b3); /* Editar Cabeçalho - Azul */
+}
+
+.admin-loja-actions button:nth-child(2) {
+  background: linear-gradient(135deg, #28a745, #218838); /* Editar Banner - Verde */
+}
+
+.admin-loja-actions button:nth-child(3) {
+  background: linear-gradient(135deg, #6f42c1, #5a32a3); /* Editar Produtos - Roxo */
+}
+
+.admin-loja-actions button:nth-child(4) {
+  background: linear-gradient(135deg, #20c997, #1aa67d); /* Editar WhatsApp - Verde-água */
+}
+
+.admin-loja-actions button:nth-child(5) {
+  background: linear-gradient(135deg, #fd7e14, #d95f0e); /* Ver Usuários - Laranja */
+}
+
+.admin-loja-actions button:nth-child(6) {
+  background: linear-gradient(135deg, #6c757d, #545b62); /* Voltar para a Home - Cinza */
 }
 
 /* Logout */
@@ -58,21 +82,21 @@
 }
 
 .logout-section button {
-  background: #ff4d4d;
+  background: linear-gradient(135deg, #ff4d4d, #cc0000); /* Logout - Vermelho */
   color: #fff;
   border: none;
   padding: 15px 30px;
   font-size: 16px;
   border-radius: 10px;
   cursor: pointer;
-  transition: transform 0.3s ease-in-out, background 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
   width: 100%;
   max-width: 300px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .logout-section button:hover {
-  background: #cc0000;
+  opacity: 0.9;
   transform: scale(1.05);
 }
 
