@@ -1,25 +1,22 @@
+// Importa o que precisa do Firebase
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
 
-// Configuração do Firebase usando variáveis de ambiente
+// Configuração do Firebase (os seus dados)
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID,
-  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
+  apiKey: "AIzaSyAe73I5HG-gJbm8SaoXJ62xUuf6ueBOKKA",
+  authDomain: "os-system-10e3b.firebaseapp.com",
+  projectId: "os-system-10e3b",
+  storageBucket: "os-system-10e3b.firebasestorage.app",
+  messagingSenderId: "909448077238",
+  appId: "1:909448077238:web:f203465a1ed6b287612b17"
 };
 
 // Inicializa o Firebase
 const app = initializeApp(firebaseConfig);
 
-// Exportando os serviços do Firebase
-const auth = getAuth(app);
+// Cria a conexão com o Firestore
 const db = getFirestore(app);
-const storage = getStorage(app);
 
-export { app, auth, db, storage, firebaseConfig };
+// Exporta o db para usar nos componentes
+export { db };
